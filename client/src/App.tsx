@@ -5,16 +5,33 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import PostDetail from "./pages/PostDetail";
+import Archive from "./pages/Archive";
+import Subscribe from "./pages/Subscribe";
+import Unsubscribe from "./pages/Unsubscribe";
+import About from "./pages/About";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function Router() {
-  // make sure to consider if you need authentication for certain routes
   return (
-    <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-1">
+        <Switch>
+          <Route path={"/"} component={Home} />
+          <Route path="/post/:id" component={PostDetail} />
+          <Route path="/archive" component={Archive} />
+          <Route path="/subscribe" component={Subscribe} />
+          <Route path="/unsubscribe" component={Unsubscribe} />
+          <Route path="/about" component={About} />
+          <Route path={"/404"} component={NotFound} />
+          {/* Final fallback route */}
+          <Route component={NotFound} />
+        </Switch>
+      </main>
+      <Footer />
+    </div>
   );
 }
 
